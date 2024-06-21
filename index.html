@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html style="height: 100%; width: 100%; display: table">
+  <head style="height: 90%; width: 90%">
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>we smokin crocodile egg shaman gelato</title>
+  </head>
+  <body style="height: 99%; width: 99%; display: table-cell; text-align: center;">
+    <div id="helperText">
+        <b id="helperTextValue">
+            Please provide a valid username and password
+        </b>
+        <b id="newNameValue">
+
+        </b>
+    </div>
+    <div id="usernameDiv">
+        Username: <input id="username"/>
+    </div>
+    <div id="passwordDiv">
+        Password: <input id="password"/>
+    </div>
+    <div id="steamGuardDiv" style="display: none !important;">
+        Steam Guard Code: <input id="steamGuard"/>
+    </div>
+    <div id="nicknameListDiv" style="display: none !important; height: 80%; width: 80%">
+        Nickname List: <textarea id="nicknameList"></textarea>
+    </div>
+    <button id="submit" type="button">Submit</button>
+    <button id="stop" type="button" style="display: none !important;">Stop</button>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
