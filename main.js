@@ -23,10 +23,17 @@ function createWindow () {
   win = new BrowserWindow({
     width: 800,
     height: 600,
-    skipTaskbar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
+  });
+
+  win.on('minimize', () => {
+    win.setSkipTaskbar(true);
+  });
+
+  win.on('restore', () => {
+    win.setSkipTaskbar(false);
   });
 
   steamObj.setWindow(win);
@@ -47,6 +54,10 @@ function createWindow () {
 
   steamObj.on('error', function(err) {
     win.webContents.send('logon-error', err);
+    setTimeout(() => {
+      win.restore();
+      win.flashFrame(true);
+    }, 1000);
   })
 
   win.loadFile('index.html')
