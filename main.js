@@ -45,6 +45,10 @@ function createWindow () {
     });
   });
 
+  steamObj.on('error', function(err) {
+    win.webContents.send('logon-error', err);
+  })
+
   win.loadFile('index.html')
 }
 

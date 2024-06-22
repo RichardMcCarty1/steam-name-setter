@@ -24,6 +24,6 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
-    "steam-user": "^5.0.10"
+    "steam-user": "github:RichardMcCarty1/node-steam-user"
   }
 }

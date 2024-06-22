@@ -19,7 +19,8 @@ submitButton.addEventListener('click', async () => {
         await window.electronAPI.submitLogin({ 
             accountName: username.value, 
             password: password.value 
-        })
+        });
+        helperTextValue.innerHTML = "Awaiting Mobile Device Approval";
     } else {
         helperTextValue.innerHTML = "Please provide a valid username and password";
     }
@@ -66,4 +67,22 @@ window.electronAPI.onSteamGuard((lastCodeWrong) => {
 
 window.electronAPI.onNameUpdate((value) => {
     newNameValue.innerHTML = ` Your current nickname is ${value.username}`
+});
+
+window.electronAPI.onLogonError((value) => {
+    helperTextValue.innerHTML = `An error occurred during login / your session was fatally disconnected: ${value}`;
+    steamGuardDiv.style.display = 'none';
+    nicknameListDiv.style.display = 'none';
+    stopButton.style.display = 'none';
+    usernameDiv.style.display = 'block';
+    passwordDiv.style.display = 'block';
+})
+
+window.electronAPI.onNicknameError(() => {
+    helperTextValue.innerHTML = 'An error occurred while setting a new nickname, it is likely the login session has expired, please login again.'
+    steamGuardDiv.style.display = 'none';
+    nicknameListDiv.style.display = 'none';
+    stopButton.style.display = 'none';
+    usernameDiv.style.display = 'block';
+    passwordDiv.style.display = 'block';
 })

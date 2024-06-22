@@ -25,15 +25,21 @@ class Steam {
     }
 
     logOn(accountName, password) {
-        this.client.logOn({ accountName, password });
+        this.client.logOn({ accountName, password, awaitDeviceApproval: true });
     }
 
     #setNickname(nicknameList) {
-        let newProfileName = nicknameList[Math.floor(Math.random() * nicknameList.length)];
-        this.client.setPersona(SteamUser.EPersonaState.Online, newProfileName);
-        this.window.webContents.send('name-update', {
-            username: newProfileName
-        });
+        try {
+            let newProfileName = nicknameList[Math.floor(Math.random() * nicknameList.length)];
+            this.client.setPersona(SteamUser.EPersonaState.Online, newProfileName);
+            this.window.webContents.send('name-update', {
+                username: newProfileName
+            });
+        } catch (e) {
+            console.log('sessionEnded', e);
+            this.window.webContents.send('nickname-error');
+        }
+
     }
 
     initSetNickname(nicknameList, ms) {

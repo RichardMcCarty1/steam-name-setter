@@ -7,7 +7,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   stopNickname: (arg) => ipcRenderer.send('stop-nickname', arg),
   onLoggedOn: (callback) => ipcRenderer.on('logged-on', (_event, value) => callback(value)),
   onSteamGuard: (callback) => ipcRenderer.on('steam-guard', (_event, value) => callback(value)),
-  onNameUpdate: (callback) => ipcRenderer.on('name-update', (_event, value) => callback(value))
+  onNameUpdate: (callback) => ipcRenderer.on('name-update', (_event, value) => callback(value)),
+  onLogonError: (callback) => ipcRenderer.on('logon-error', (_event, value) => callback(value)),
+  onNicknameError: (callback) => ipcRenderer.on('nickname-error', (_event) => callback())
 })
 
 window.addEventListener('DOMContentLoaded', () => {
